@@ -3,6 +3,7 @@
 
  - [Impacket](https://github.com/SecureAuthCorp/impacket)
  - [Payload All The Things](https://github.com/swisskyrepo/PayloadsAllTheThings)
+ - [Reverse Shells](https://www.revshells.com/)
 
 ## Linux Enumeration and Exploitation
 

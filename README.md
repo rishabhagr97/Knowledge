@@ -61,3 +61,20 @@ hydra -l <username> -P <full path to pass> MACHINE_IP -t 4 ssh
 hydra -l <username> -P <wordlist> MACHINE_IP http-post-form "/:username=^USER^&password=^PASS^:F=incorrect" -V
 ```
 For GUI, we can use xhydra or hydra-wizard
+
+# Information Gathering Tools
+- Sublist3r
+- hunter.io
+- builtwith.com
+- wappalyzer
+- dnsdumpster (site)
+- nslookup and dig
+
+# Exploit Databases and Search Tools
+- Exploit Db
+- Nvd nist
+
+# Vulnerability Scanning Tools
+- Nikto
+- Owasp-zap
+

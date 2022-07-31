@@ -22,6 +22,11 @@
 
 
 # Important Tools
+## nc
+To scan all open ports faster
+```bash
+nc -zv 192.168.100.1 1-65535
+```
 ## Ghidra
 Tool to analyse any binary.
 ## GoBuster

@@ -1,0 +1,4 @@
+# Send request as different IP address
+```bash
+curl --header "X-Forwarded-For: <IP Address>" <URL>
+```

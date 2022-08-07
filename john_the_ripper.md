@@ -20,3 +20,11 @@ Dump /etc/shadow and /etc/passwd files and unshadow them using following command
 unshadow [path to passwd] [path to shadow] >> output.txt
 ```
 Then crack using john with format SHA512crypt
+
+# Single Crack Mode
+We sometime know the hint like name that we can use in john and john will make its own wordlist to crack password with various combination using word mangling.
+To use this first add name as prefix in hash <name>:<hash>
+Then crack using this command
+```bash
+john --single --format=[format] [path to file]
+```

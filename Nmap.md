@@ -37,5 +37,6 @@ nmap -PM -sn <IP>
 ```
 
 ## Host discovertry using TCP/UDP
-
+Normal TCP Scan - Sends SYN, Receives SYN/RST and ACK and then Sends ACK.
+TCP SYN Scan - Sends SYN, Receives SYN/RST
 

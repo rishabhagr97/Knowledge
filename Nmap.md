@@ -6,6 +6,11 @@ nmap -sL -n <IP Range>.
 To ignore Reverse DNS lookup use -n
 
 To force reverse DNS for offline hosts also use -R
+
+To do fast scan for first 100 default ports use -F
+
+To do port scan in consecutive order use -r
+
 # Host Discovery
 There are 3 methods to do host discovery
 - ARP scan: This scan uses ARP requests to discover live hosts

@@ -3,6 +3,8 @@ List IP addresses to scan. Do not scan actually.
 ```bash
 nmap -sL -n <IP Range>.
 ```
+To ignore Reverse DNS lookup use -n
+To force reverse DNS for offline hosts also use -R
 # Host Discovery
 There are 3 methods to do host discovery
 - ARP scan: This scan uses ARP requests to discover live hosts
@@ -37,6 +39,16 @@ nmap -PM -sn <IP>
 ```
 
 ## Host discovertry using TCP/UDP
-Normal TCP Scan - Sends SYN, Receives SYN/RST and ACK and then Sends ACK.
-TCP SYN Scan - Sends SYN, Receives SYN/RST
 
+TCP SYN Ping - Sends SYN, Receives SYN/RST
+```bash
+nmap -PS<ports or leave blank> -sn <IP>
+```
+TCP ACK Ping - Sends ACK, Receives RST
+```bash
+nmap -PA<ports or leave blank> -sn <IP>
+```
+UDP Ping
+```bash
+nmap -PU -sn <IP>
+```

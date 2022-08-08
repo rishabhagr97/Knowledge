@@ -4,6 +4,7 @@ List IP addresses to scan. Do not scan actually.
 nmap -sL -n <IP Range>.
 ```
 To ignore Reverse DNS lookup use -n
+
 To force reverse DNS for offline hosts also use -R
 # Host Discovery
 There are 3 methods to do host discovery

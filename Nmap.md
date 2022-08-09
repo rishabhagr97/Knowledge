@@ -118,3 +118,16 @@ will make the scan of 10.10.167.3 appear as coming from the IP addresses 10.10.0
 nmap -D 10.10.0.1,10.10.0.2,RND,RND,ME 10.10.167.3
 ```
 where the third and fourth source IP addresses are assigned randomly, while the fifth source is going to be the attacker’s IP address. In other words, each time you execute the latter command, you would expect two new random IP addresses to be the third and fourth decoy sources.
+
+# Fragmented Packets
+Nmap provides the option -f to fragment packets. Once chosen, the IP data will be divided into 8 bytes or less. Adding another -f (-f -f or -ff) will split the data into 16 byte-fragments instead of 8. You can change the default value by using the --mtu; however, you should always choose a multiple of 8.
+
+On the other hand, if you prefer to increase the size of your packets to make them look innocuous, you can use the option --data-length NUM, where num specifies the number of bytes you want to append to your packets.
+
+Spoofing the source IP address can be a great approach to scanning stealthily. However, spoofing will only work in specific network setups. It requires you to be in a position where you can monitor the traffic. Considering these limitations, spoofing your IP address can have little use; however, we can give it an upgrade with the idle scan.
+
+# Idle/Zombie Scan
+The idle scan, or zombie scan, requires an idle system connected to the network that you can communicate with. Practically, Nmap will make each probe appear as if coming from the idle (zombie) host, then it will check for indicators whether the idle (zombie) host received any response to the spoofed probe. This is accomplished by checking the IP identification (IP ID) value in the IP header. You can run an idle scan using nmap -sI ZOMBIE_IP 10.10.167.3, where ZOMBIE_IP is the IP address of the idle host (zombie).
+
+# Resoning
+For more detailing we can use --reason that will specify why the post is open. And, for further detailing we can use -vv or for more -d or -dd.

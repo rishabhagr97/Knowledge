@@ -97,3 +97,24 @@ The TCP window scan is almost the same as the ACK scan; however, it examines the
 However, as you would expect, if we repeat our TCP window scan against a server behind a firewall, we expect to get more satisfying results. In the console output shown below, the TCP window scan pointed that three ports are detected as closed. (This is in contrast with the ACK scan that labelled the same three ports as unfiltered.) Although we know that these three ports are not closed, we realize they responded differently, indicating that the firewall does not block them.
 ##Custom Scan
 If you want to experiment with a new TCP flag combination beyond the built-in TCP scan types, you can do so using --scanflags. For instance, if you want to set SYN, RST, and FIN simultaneously, you can do so using --scanflags RSTSYNFIN. As shown in the figure below, if you develop your custom scan, you need to know how the different ports will behave to interpret the results in different scenarios correctly.
+
+# Spoofing
+## Spoof IP Address
+To spoof attacker's IP address, use following command -
+```bash
+nmap -e NET_INTERFACE -Pn -S SPOOFED_IP ATTACK_IP
+```
+Nmap will craft all the packets using the provided source IP address SPOOFED_IP. The target machine will respond to the incoming packets sending the replies to the destination IP address SPOOFED_IP. For this scan to work and give accurate results, the attacker needs to monitor the network traffic to analyze the replies.
+Ping scan will not work so we disabled it. And, NET_INTERFACE is the interface that is used for spoofing IP.
+## Spoof MAC Address
+When you are on the same subnet as the target machine, you would be able to spoof your MAC address as well. You can specify the source MAC address using --spoof-mac SPOOFED_MAC. This address spoofing is only possible if the attacker and the target machine are on the same Ethernet (802.3) network or same WiFi (802.11).
+## Decoys
+You can launch a decoy scan by specifying a specific or random IP address after -D. For example, 
+```bash
+nmap -D 10.10.0.1,10.10.0.2,ME 10.10.167.3
+```
+will make the scan of 10.10.167.3 appear as coming from the IP addresses 10.10.0.1, 10.10.0.2, and then ME to indicate that your IP address should appear in the third order. Another example command would be
+```bash
+nmap -D 10.10.0.1,10.10.0.2,RND,RND,ME 10.10.167.3
+```
+where the third and fourth source IP addresses are assigned randomly, while the fifth source is going to be the attacker’s IP address. In other words, each time you execute the latter command, you would expect two new random IP addresses to be the third and fourth decoy sources.

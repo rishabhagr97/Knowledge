@@ -3,6 +3,10 @@ List IP addresses to scan. Do not scan actually.
 ```bash
 nmap -sL -n <IP Range>.
 ```
+OS Detection = -O
+
+Traceroute = --traceroute
+
 To ignore Reverse DNS lookup use -n
 
 To force reverse DNS for offline hosts also use -R
@@ -131,3 +135,29 @@ The idle scan, or zombie scan, requires an idle system connected to the network 
 
 # Resoning
 For more detailing we can use --reason that will specify why the post is open. And, for further detailing we can use -vv or for more -d or -dd.
+
+# Service Detection
+Adding -sV to your Nmap command will collect and determine service and version information for the open ports. You can control the intensity with --version-intensity LEVEL where the level ranges between 0, the lightest, and 9, the most complete. -sV --version-light has an intensity of 2, while -sV --version-all has an intensity of 9.
+
+It is important to note that using -sV will force Nmap to proceed with the TCP 3-way handshake and establish the connection. The connection establishment is necessary because Nmap cannot discover the version without establishing a connection fully and communicating with the listening service. In other words, stealth SYN scan -sS is not possible when -sV option is chosen.
+
+# NSE Scripts
+You can choose to run the scripts in the default category using --script=default or simply adding -sC. In addition to default, 
+
+auth            Authentication related scripts
+broadcast       Discover hosts by sending broadcast messages
+brute           Performs brute-force password auditing against logins
+default         Default scripts, same as -sC
+discovery       Retrieve accessible information, such as database tables and DNS names
+dos             Detects servers vulnerable to Denial of Service (DoS)
+exploit         Attempts to exploit various vulnerable services
+external        Checks using a third-party service, such as Geoplugin and Virustotal
+fuzzer          Launch fuzzing attacks
+intrusive       Intrusive scripts such as brute-force attacks and exploitation
+malware         Scans for backdoors
+safe            Safe scripts that won’t crash the target
+version         Retrieve service versions
+vuln            Checks for vulnerabilities or exploit vulnerable services
+
+
+You can also specify the script by name using --script "SCRIPT-NAME" or a pattern such as --script "ftp*", which would include ftp-brute. If you are unsure what a script does, you can open the script file with a text reader.

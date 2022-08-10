@@ -113,7 +113,7 @@ nmap -e NET_INTERFACE -Pn -S SPOOFED_IP ATTACK_IP
 Nmap will craft all the packets using the provided source IP address SPOOFED_IP. The target machine will respond to the incoming packets sending the replies to the destination IP address SPOOFED_IP. For this scan to work and give accurate results, the attacker needs to monitor the network traffic to analyze the replies.
 Ping scan will not work so we disabled it. And, NET_INTERFACE is the interface that is used for spoofing IP.
 ## Spoof MAC Address
-When you are on the same subnet as the target machine, you would be able to spoof your MAC address as well. You can specify the source MAC address using --spoof-mac SPOOFED_MAC. This address spoofing is only possible if the attacker and the target machine are on the same Ethernet (802.3) network or same WiFi (802.11).
+When you are on the same subnet as the target machine, you would be able to spoof your MAC address as well. You can specify the source MAC address using --spoof-mac SPOOFED_MAC. This address spoofing is only possible if the attacker and the target machine are on the same Ethernet (802.3) network or same WiFi (802.11). It allows you to exploit any trust relationship based on MAC addresses. 
 ## Decoys
 You can launch a decoy scan by specifying a specific or random IP address after -D. For example, 
 ```bash

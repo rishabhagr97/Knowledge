@@ -1,4 +1,6 @@
 # Common Commands
+
+To identify common services running on ports visit https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml 
 List IP addresses to scan. Do not scan actually.
 ```bash
 nmap -sL -n <IP Range>.

